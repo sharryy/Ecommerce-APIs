@@ -5,4 +5,6 @@ app.post('/', CategoryController.createCategory);
 
 app.get('/', CategoryController.getAllCategories);
 
+app.get('/:id', CategoryController.getProductsOfCategory);
+
 module.exports = app;

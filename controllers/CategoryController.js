@@ -1,4 +1,5 @@
 const Category = require('../models/Category');
+const Product = require('../models/Product');
 
 if (process.env.NODE_ENV === 'production') {
     require('dotenv').config();
@@ -44,6 +45,30 @@ exports.getAllCategories = async function (req, res, next) {
         return res.status(500).json({
             success: false,
             message: "Error getting categories. Please try again later." + error.message
+        });
+    }
+}
+
+exports.getProductsOfCategory = async function (req, res, next) {
+    try {
+        const data = await Product.find({category_id: req.params.id},);
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: "Category not found"
+            });
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: "Products retrieved successfully",
+                count: data.length,
+                products: data
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error getting products of category. Please try again later." + error.message
         });
     }
 }

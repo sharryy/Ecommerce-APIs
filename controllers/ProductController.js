@@ -14,7 +14,7 @@ exports.createProduct = async (req, res, next) => {
         const product = await createNewProduct(req);
         const response = await product.save();
 
-        return res.status(200).json({success: false, message: "Product created successfully", product: response});
+        return res.status(200).json({success: true, message: "Product created successfully", product: response});
     } catch (error) {
         return res.status(500).json({error: error.message});
     }
