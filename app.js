@@ -3,13 +3,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
-// const userRoutes = require('/routes/UserRoutes');
+const UserRoutes = require('./routes/UserRoutes');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.use("/user", userRoutes);
+app.use("/user", UserRoutes);
 
 
 app.get('/', (req, res) => {
