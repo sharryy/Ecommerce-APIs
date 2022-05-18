@@ -4,13 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev-start": "nodemon server.js"
+    "dev-start": "nodemon server.js",
+    "seeder": "node node_modules/mongoose-dummy-seeder/index.js"
   },
   "keywords": [],
   "author": "Shehryar Amin",
   "license": "ISC",
   "devDependencies": {
-    "mongoose-dummy-seeder": "^1.0.3",
     "nodemon": "^2.0.16"
   },
   "dependencies": {
