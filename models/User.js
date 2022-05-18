@@ -4,7 +4,8 @@ const UserSchema = new mongoose.Schema({
         name: {
             type: String,
             trim: true,
-            required: true
+            required: true,
+            get: value => value.charAt(0).toUpperCase + value.slice(1),
         },
         email: {
             type: String,
@@ -22,7 +23,7 @@ const UserSchema = new mongoose.Schema({
             trim: true,
             required: true
         },
-    }, {timestamps: true}
+    }, {timestamps: true}, {toJSON: {getters: true}}
 );
 
 module.exports = mongoose.model('User', UserSchema);
