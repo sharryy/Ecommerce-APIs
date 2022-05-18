@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const User = require('../models/User');
 const {loginValidation, registerValidation} = require('../middleware/validation');
-const {hash} = require("bcrypt");
 
 exports.signUp = async (req, res, next) => {
     const {error, value} = registerValidation(req.body);
