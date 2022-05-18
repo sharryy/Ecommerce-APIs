@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const {connect} = require("mongoose");
 require("dotenv").config();
 
-const database = mongoose.connect(
+const database = connect(
     process.env.DATABASE_URL,
     {
         useNewUrlParser: true,
@@ -9,7 +9,7 @@ const database = mongoose.connect(
     },
     (error) => {
         if (!error) {
-            console.log("Connected to the mongoDB");
+            console.log("Connected to the MongoDB");
         } else {
             console.log("Connection to MongoDB failed \n" + error);
         }
