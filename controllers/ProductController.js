@@ -41,6 +41,27 @@ exports.getAllProducts = async (req, res) => {
     }
 }
 
+exports.getProductById = async(req, res) => {
+    try {
+        await Product.findById(req.params.id, {__v: 0})
+            .populate('category_id', "name createdAt updatedAt", {})
+            .exec((error, product) => {
+                if (error) return res.status(500).json({success: false, message: error.message});
+                if (!product) return res.status(404).json({success: false, message: "Product not found"});
+                return res.status(200).json({
+                    success: true,
+                    message: "Product retrieved successfully",
+                    product: product
+                });
+            });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error getting product. Please try again later." + error.message
+        });
+    }
+}
+
 async function createNewProduct(req) {
     return new Product({
         category_id: req.body.category_id,
