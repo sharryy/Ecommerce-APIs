@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const User = require('../models/User');
-const {loginValidation, registerValidation} = require('../middleware/validation');
+const {loginValidation, registerValidation} = require('../middleware/UserValidation');
 
 exports.signUp = async (req, res, next) => {
     const {error, value} = registerValidation(req.body);

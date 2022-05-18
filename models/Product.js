@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
         category_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Category'
+            ref: 'Category',
+            required: [true, 'Category ID is required']
         },
         name: {
             type: String,
@@ -27,6 +28,10 @@ const productSchema = new mongoose.Schema({
         product_image: {
             type: String,
             required: false
+        },
+        sku: {
+            type: String,
+            required: true,
         },
         quantity: {
             type: Number,
