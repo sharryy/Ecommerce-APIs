@@ -18,8 +18,11 @@ app.use("/category", CategoryRoutes);
 app.use("/product", ProductRoutes);
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+//Handling Errors
+app.use((req, res, next) => {
+    const error = new Error('Not found');
+    error.status = 404;
+    next(error);
 });
 
 module.exports = app;
