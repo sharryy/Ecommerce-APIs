@@ -12,3 +12,5 @@ function validateProduct(data) {
     });
     return schema.validate(data);
 }
+
+module.exports = {validateProduct}
