@@ -12,11 +12,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/auth", UserRoutes);
-
 app.use("/category", CategoryRoutes);
-
 app.use("/product", ProductRoutes);
-
 
 //Handling Errors
 app.use((req, res, next) => {
