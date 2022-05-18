@@ -21,7 +21,20 @@ exports.createProduct = async (req, res, next) => {
 }
 
 exports.getAllProducts = async (req, res) => {
-
+    try {
+        const data = await Product.find().populate({path: 'category', select: '_id name createdAt updatedAt'});
+        res.status(200).json({
+            success: true,
+            message: "Products fetched successfully",
+            length: data.length,
+            data: data
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
 }
 
 async function createNewProduct(req) {

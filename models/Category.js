@@ -9,7 +9,7 @@ const categorySchema = new mongoose.Schema({
             get: value => value.charAt(0).toUpperCase() + value.slice(1),
             set: value => value.toLowerCase()
         },
-    }, {timestamps: true, toJSON: {getters: true}}
+    }, {timestamps: true, toJSON: {getters: true}}, {_id: false}
 );
 
 module.exports = mongoose.model('Category', categorySchema);

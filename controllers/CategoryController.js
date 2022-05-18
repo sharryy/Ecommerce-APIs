@@ -24,16 +24,26 @@ exports.createCategory = async function (req, res, next) {
 }
 
 exports.getAllCategories = async function (req, res, next) {
-    Category.find({}, "_id name createdAt updatedAt", (error, categories) => {
-        if (error) return res.status(500).json({
-            success: false,
-            message: "Error getting categories. Please try again later."
+    try {
+        const data = await Category.find({}, "_id name createdAt updatedAt");
+        const categories = data.map(category => {
+            return {
+                _id: category._id,
+                name: category.name,
+                createdAt: category.createdAt,
+                updatedAt: category.updatedAt
+            }
         });
-        return res.status(200).json({
+        res.status(200).json({
             success: true,
             message: "Categories retrieved successfully",
-            count: categories.length,
+            count: data.length,
             categories: categories
         });
-    })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error getting categories. Please try again later." + error.message
+        });
+    }
 }
