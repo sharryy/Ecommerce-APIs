@@ -10,37 +10,45 @@ const {loginValidation, registerValidation} = require('../middleware/UserValidat
 
 exports.signUp = async (req, res, next) => {
     const {error, value} = registerValidation(req.body);
-    if (error) return res.status(400).json({error: error.details[0].message});
+    if (error) return res.status(400).json({success: false, message: error.details[0].message});
 
     const emailExist = await User.findOne({email: req.body.email});
-    if (emailExist) return res.status(400).json({error: 'Email already exists'});
+    if (emailExist) return res.status(400).json({success: false, message: 'Email already exists'});
 
     try {
         const newUser = await createNewUser(req);
         const response = await newUser.save();
 
         return res.status(200).json({
+            success: true,
             message: 'User created successfully',
             user: response
         });
     } catch (error) {
-        return res.status(400).json({error: error.message});
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        });
     }
 }
 
-exports.logIn = async function (req, res) {
+exports.logIn = async (req, res) => {
     const {error, value} = loginValidation(req.body);
-    if (error) return res.status(400).json({error: error.details[0].message});
+    if (error) return res.status(400).json({success: false, message: error.details[0].message});
 
     const user = await User.findOne({email: req.body.email});
-    if (!user) return res.status(400).json({error: 'Invalid Email or Password'});
+    if (!user) return res.status(400).json({success: false, message: 'Invalid Email or Password'});
 
     try {
         const validPassword = await bcrypt.compare(req.body.password, user.password);
-        if (!validPassword) return res.status(400).json({error: "Invalid Password"});
+        if (!validPassword) return res.status(400).json({success: true, message: "Invalid Password"});
 
         const token = await jwt.sign({_id: user.id}, process.env.JWT_KEY);
-        return res.status(200).header("auth-token", token).json({"auth-token": token, userId: user._id});
+        return res.status(200).header("auth-token", token).json({
+            "success": true,
+            "auth-token": token,
+            userId: user._id
+        });
     } catch (error) {
         res.status(400).json({error: error.message});
     }

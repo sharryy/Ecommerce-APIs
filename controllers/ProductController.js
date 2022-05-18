@@ -6,18 +6,22 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-exports.createProduct = async function (req, res, next) {
+exports.createProduct = async (req, res, next) => {
     const {error, value} = validateProduct(req.body);
-    if (error) return res.status(400).json({"error": error.details[0].message});
+    if (error) return res.status(400).json({success: false, message: error.details[0].message});
 
     try {
         const product = await createNewProduct(req);
         const response = await product.save();
 
-        return res.status(200).json({"message": "Product created successfully", "product": response});
+        return res.status(200).json({success: false, message: "Product created successfully", product: response});
     } catch (error) {
         return res.status(500).json({error: error.message});
     }
+}
+
+exports.getAllProducts = async (req, res) => {
+
 }
 
 async function createNewProduct(req) {
@@ -27,7 +31,7 @@ async function createNewProduct(req) {
         description: req.body.description,
         price: req.body.price,
         product_image: req.body.image,
-        sku: req.body.category,
+        sku: req.body.sku,
         quantity: req.body.quantity,
     });
 }
