@@ -9,7 +9,7 @@ const User = require('../models/User');
 const {loginValidation, registerValidation} = require('../middleware/validation');
 const {hash} = require("bcrypt");
 
-exports.signup = async (req, res, next) => {
+exports.signUp = async (req, res, next) => {
     const {error, value} = registerValidation(req.body);
     if (error) return res.status(400).json({error: error.details[0].message});
 
@@ -18,7 +18,6 @@ exports.signup = async (req, res, next) => {
 
     try {
         const newUser = await createNewUser(req);
-        console.log(newUser);
         const response = await newUser.save();
 
         return res.status(200).json({
@@ -27,6 +26,24 @@ exports.signup = async (req, res, next) => {
         });
     } catch (error) {
         return res.status(400).json({error: error.message});
+    }
+}
+
+exports.logIn = async function (req, res) {
+    const {error, value} = loginValidation(req.body);
+    if (error) return res.status(400).json({error: error.details[0].message});
+
+    const user = await User.findOne({email: req.body.email});
+    if (!user) return res.status(400).json({error: 'Invalid Email or Password'});
+
+    try {
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) return res.status(400).json({error: "Invalid Password"});
+
+        const token = await jwt.sign({_id: user.id}, process.env.JWT_KEY);
+        return res.status(200).header("auth-token", token).json({"auth-token": token, userId: user._id});
+    } catch (error) {
+        res.status(400).json({error: error.message});
     }
 }
 
