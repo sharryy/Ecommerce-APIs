@@ -22,17 +22,21 @@ exports.createProduct = async (req, res, next) => {
 
 exports.getAllProducts = async (req, res) => {
     try {
-        const data = await Product.find().populate({path: 'category', select: '_id name createdAt updatedAt'});
-        res.status(200).json({
-            success: true,
-            message: "Products fetched successfully",
-            length: data.length,
-            data: data
-        });
+        await Product.find({}, {__v: 0})
+            .populate('category_id', "name createdAt updatedAt", {})
+            .exec((error, products) => {
+                if (error) return res.status(500).json({success: false, message: error.message});
+                return res.status(200).json({
+                    success: true,
+                    message: "Products retrieved successfully",
+                    length: products.length,
+                    products: products
+                });
+            });
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: "Error getting categories. Please try again later." + error.message
         });
     }
 }
