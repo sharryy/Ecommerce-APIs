@@ -1,5 +1,6 @@
 const Category = require('../models/Category');
 const Product = require('../models/Product');
+const {query} = require("express");
 
 if (process.env.NODE_ENV === 'production') {
     require('dotenv').config();
@@ -51,7 +52,10 @@ exports.getAllCategories = async function (req, res, next) {
 
 exports.getProductsOfCategory = async function (req, res, next) {
     try {
-        const data = await Product.find({category_id: req.params.id},);
+        const data = await Product.find({category_id: req.params.id}).populate({
+            path: 'category_id',
+            select: '_id name createdAt updatedAt'
+        });
         if (!data) {
             return res.status(404).json({
                 success: false,
