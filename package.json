@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev-start": "nodemon server.js",
-    "seeder": "node node_modules/mongoose-dummy-seeder/index.js"
+    "dev-start": "nodemon server.js"
   },
   "keywords": [],
   "author": "Shehryar Amin",
