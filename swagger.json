@@ -530,17 +530,13 @@
     "User": {
       "type": "object",
       "required": [
-        "firstName",
-        "lastName",
+        "name",
         "email",
         "password",
         "phone"
       ],
       "properties": {
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
+        "name": {
           "type": "string"
         },
         "email": {
@@ -552,9 +548,6 @@
         "phone": {
           "type": "string"
         }
-      },
-      "xml": {
-        "name": "User"
       }
     },
     "Cart": {
@@ -575,45 +568,42 @@
           "type": "integer",
           "default": "1"
         }
-      },
-      "xml": {
-        "name": "Cart"
       }
     },
     "Product": {
       "type": "object",
       "required": [
+        "category_id",
         "name",
         "description",
         "price",
-        "productImage",
-        "categoryId",
+        "product_image",
+        "sku",
         "quantity"
       ],
       "properties": {
+        "category_id": {
+          "type": "string"
+        },
         "name": {
-          "type": "String"
+          "type": "string"
         },
         "description": {
-          "type": "String"
+          "type": "string"
         },
         "price": {
           "type": "number",
-          "default": "1"
+          "default": "0"
         },
-        "productImage": {
-          "type": "String"
+        "product_image": {
+          "type": "string"
         },
-        "categoryId": {
-          "type": "String"
+        "sku": {
+          "type": "string"
         },
         "quantity": {
-          "type": "integer",
-          "default": "1"
+          "type": "integer"
         }
-      },
-      "xml": {
-        "name": "Product"
       }
     },
     "Category": {
@@ -625,9 +615,6 @@
         "name": {
           "type": "string"
         }
-      },
-      "xml": {
-        "name": "Cart"
       }
     }
   }
