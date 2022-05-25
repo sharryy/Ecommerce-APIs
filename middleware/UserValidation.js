@@ -15,7 +15,7 @@ function loginValidation(data) {
         email: Joi.string().email().required(),
         password: Joi.string().min(4).required()
     });
-    return schema.validate(data, {abortEarly: false});
+    return schema.validate(data);
 }
 
 module.exports = {
