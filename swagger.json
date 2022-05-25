@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Nodejs eCommerce Shopping API that allows API consumers to interact with the application, behind the scene it uses Nodejs, Express and MongoDB",
-    "version": "1.0",
+    "version": "2.0",
     "title": "Nodejs eCommerce API",
     "contact": {
       "email": "anonymous@gmail.com"
