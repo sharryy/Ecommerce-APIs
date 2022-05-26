@@ -1,6 +1,9 @@
-FROM node:latest
-RUN mkdir -p /app/src
-WORKDIR /app/src
+FROM node:14
+
+LABEL maintainer="Shehryar Amin"
+
+RUN mkdir -p /src
+WORKDIR /src
 COPY package*.json .
 RUN npm install
 COPY . .
