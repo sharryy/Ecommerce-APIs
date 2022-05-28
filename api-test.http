@@ -2,12 +2,18 @@ POST http://localhost:3000/product
 Content-Type: application/json
 
 {
-  "category_id": "628ce058be94a071c96c890d",
-  "name": "JProduct 1",
-  "description": "JProduct 1 description",
+  "category_id": "62929bc617d5bab61d98a10a",
+  "name": "Docker Product 1",
+  "description": "Docker description 1",
   "price": "100.00",
   "sku": "JP-1",
   "quantity": "10"
 }
 
 ###
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "Docker Category # 3"
+}
