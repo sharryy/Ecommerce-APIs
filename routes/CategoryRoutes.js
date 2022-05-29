@@ -3,7 +3,7 @@ const CategoryController = require('../controllers/CategoryController');
 
 app.post('/', CategoryController.createCategory);
 
-app.get('/', CategoryController.getAllCategories);
+app.get('/show', CategoryController.getAllCategories);
 
 app.get('/:id', CategoryController.getProductsOfCategory);
 

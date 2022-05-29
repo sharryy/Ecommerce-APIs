@@ -3,7 +3,7 @@ const ProductController = require('../controllers/ProductController');
 
 app.post('/', ProductController.createProduct);
 
-app.get('/', ProductController.getAllProducts);
+app.get('/show', ProductController.getAllProducts);
 
 app.get('/:id', ProductController.getProductById);
 
