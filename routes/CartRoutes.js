@@ -3,6 +3,7 @@ const CartController = require('../controllers/CartController');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_KEY;
 
+//Middleware
 router.use((req, res, next) => {
     const token = req.header("auth-token");
     if (!token) return res.status(401).json({success: false, message: "Auth-Token Missing. Access Denied"});
