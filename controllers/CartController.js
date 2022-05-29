@@ -59,3 +59,23 @@ exports.getOrder = async (req, res, next) => {
         });
 }
 
+exports.getUserOrders = async (req, res, next) => {
+    await Cart.find({user: req.params.id}, {__v: 0})
+        .populate('product', {id: 0, createdAt: 0, updatedAt: 0, __v: 0})
+        .populate('user', {id: 0, createdAt: 0, updatedAt: 0, __v: 0})
+        .exec((error, orders) => {
+            if (error) {
+                return res.status(500).json({
+                    success: false,
+                    message: error,
+                });
+            }
+            return res.status(200).json({
+                success: true,
+                message: 'Orders retrieved successfully',
+                length: orders.length,
+                data: orders
+            });
+        });
+}
+

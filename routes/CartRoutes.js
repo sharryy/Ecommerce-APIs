@@ -17,6 +17,6 @@ router.use((req, res, next) => {
 
 router.post('/', CartController.createOrder);
 router.get('/:id', CartController.getOrder);
-
+router.get('/user/:id', CartController.getUserOrders);
 
 module.exports = router;

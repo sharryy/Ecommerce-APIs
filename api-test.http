@@ -19,3 +19,6 @@ Content-Type: application/json
   "email": "name@example.com",
   "password": "password"
 }
+
+###
+GET http://localhost:3000/cart/user/
