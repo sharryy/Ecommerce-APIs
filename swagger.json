@@ -336,7 +336,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "Successful operation"
           },
           "400": {
             "description": "Bad request"
