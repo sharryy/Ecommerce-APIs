@@ -1,19 +1,21 @@
-POST http://localhost:3000/product
+GET http://localhost:3000/product/show
+
+###
+POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "category_id": "62929bc617d5bab61d98a10a",
-  "name": "Docker Product 1",
-  "description": "Docker description 1",
-  "price": "100.00",
-  "sku": "JP-1",
-  "quantity": "10"
+  "name": "test",
+  "email": "name@example.com",
+  "password": "password",
+  "phone": "12345678911"
 }
 
 ###
-POST http://localhost:3000/category
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "name": "Docker Category # 3"
+  "email": "name@example.com",
+  "password": "password"
 }
