@@ -1,22 +1,11 @@
 version: "3.8"
 
 services:
-  mongodb:
-    image: mongo:latest
-    restart: always
-    ports:
-      - '27017:27017'
-    volumes:
-      - db:/data/db
   app:
-    depends_on:
-      - mongodb
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
     ports:
       - '3000:3000'
-volumes:
-  db:
 
